@@ -115,13 +115,50 @@ function submit(){
     var dob= $("#dob") .val();//document.getElementById("dob").value;  
     var country = $("#country") .val();//document.getElementById("country").value;
     var gender = $("#gender:checked").val();
-    var carsArray=[];
+    var error=0;
+     var regEx = new RegExp('^([a-z]|[A-Z])([a-z]|[A-Z]|[1-9])+$', 'g');
+    if (firstName.length == 0 || firstName.match(regEx)==null){
+        error++;
+        
+        $("#fnameErr").show();
+            
+    }else{
+        $("#fnameErr").hide();
+    }
+    if (lastName.length == 0 || lastName.match(regEx)==null){
+            error++;
+        $("#lnameErr").show();
+          
+    }else{
+         $("#lnameErr").hide();
+    }
+    if (address.length == 0 || address.match(regEx)==null){
+          error++;
+        $("#addErr").show();
+       
+    }else{
+        $("#addErr").hide();
+    }
+    if (dob.length == 0){
+        error++;
+        $("#dobErr").show();
+    }else{
+        $("#dobErr").hide();
+    }
+    
+    
+    
+    
+    
+    
+    
+   /* var carsArray=[];
     var cars = document.getElementsByName("cars");
     for(var i =0; i<cars.length; i++){
         if (cars[i].checked){
             carsArray.push(cars[i].value);
         }
-    }
+    }*/
     
     personObj.setFirstName(firstName);
     personObj.setLastName(lastName);
@@ -183,30 +220,32 @@ function display(){
 function validate(){
     var error = 0;
     var regEx = new RegExp('^([a-z]|[A-Z])([a-z]|[A-Z]|[1-9])+$', 'g');
-    
-    var firstName = $("#firstName").val();
-    console.log(firstName.match(regEx));
-    var lastName = $("#lastName").val();
-    var address = $("#address").val();
-    var dob = $("#dob").val();
-    
+            
     if (firstName.length == 0 || firstName.match(regEx)==null){
-         $("#fnameErr").show();
+        error++;
+        
+        $("#fnameErr").show();
+            
     }else{
         $("#fnameErr").hide();
     }
     if (lastName.length == 0 || lastName.match(regEx)==null){
-          $("#lnameErr").show();
+            error++;
+        $("#lnameErr").show();
+          
     }else{
          $("#lnameErr").hide();
     }
     if (address.length == 0 || address.match(regEx)==null){
-         $("#addErr").show();
+          error++;
+        $("#addErr").show();
+       
     }else{
         $("#addErr").hide();
     }
     if (dob.length == 0){
-       $("#dobErr").show();
+        error++;
+        $("#dobErr").show();
     }else{
         $("#dobErr").hide();
     }
